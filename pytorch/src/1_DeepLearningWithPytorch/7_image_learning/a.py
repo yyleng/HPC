@@ -26,3 +26,13 @@ label_map = {0: 0, 2: 1}
 class_names = ['airplane', 'bird']
 cifar2 = [(img, label_map[label]) for img, label in cifar10 if label in [0, 2]]
 cifar2_val = [(img, label_map[label]) for img, label in cifar10_val if label in [0, 2]]
+
+in_feature = 32 * 32 * 3
+out_feature = 2
+import torch.nn as nn
+model = nn.Sequential(
+    nn.Linear(in_feature, 512),
+    nn.Tanh(),
+    nn.Linear(512, out_feature),
+    nn.Softmax(dim=1)
+)
